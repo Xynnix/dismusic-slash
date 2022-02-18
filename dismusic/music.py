@@ -5,7 +5,7 @@ import discord
 from discord import ClientException, Color, Embed
 from discord.commands import (
     Option,
-    slash_command,
+    SlashCommand,
     SlashCommandGroup
 )
 from discord.ext import commands
