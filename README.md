@@ -9,7 +9,7 @@ Music cog for discord bots. Supports YouTube, YoutubeMusic, SoundCloud and Spoti
 or from Github (Might be unstable)
 
 ```sh
-python3 -m pip install git+https://github.com/NixonXC/cord-musicc.git
+python3 -m pip install git+https://github.com/NixonXC/cord-music.git
 ```
 
 # Usage
@@ -48,8 +48,6 @@ bot.run('TOKEN')
 **queue** - `See queue` \
 **volume** - `Set volume` \
 **loop** - `Loop song/playlist`
-
-> Filter commands coming soon.
 
 # Events
 
