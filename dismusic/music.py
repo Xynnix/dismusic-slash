@@ -11,7 +11,6 @@ from .checks import voice_channel_player, voice_connected
 from .errors import MustBeSameChannel
 from .player import DisPlayer
 from ._classes import Provider
-from discord.commands import slash_command
 
 class Music(commands.Cog):
     """Music commands"""
