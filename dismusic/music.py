@@ -78,7 +78,7 @@ class Music(commands.Cog):
             except Exception:
                 print(f"[dismusic] ERROR - Failed to create node {config['host']}:{config['port']}")
 
-    @commands.command(aliases=["con"])
+    @slash_command(aliases=["con"])
     @voice_connected()
     async def connect(self, ctx: commands.Context):
         """Connect the player"""
@@ -129,7 +129,7 @@ class Music(commands.Cog):
         await ctx.invoke(self.connect)
         await self.play_track(ctx, query, "spotify")
 
-    @commands.command(aliases=["vol"])
+    @slash_command(aliases=["vol"])
     @voice_channel_player()
     async def volume(self, ctx: commands.Context, vol: int, forced=False):
         """Set volume"""
@@ -142,19 +142,19 @@ class Music(commands.Cog):
             return await ctx.send("Volume can't greater than 100")
 
         await player.set_volume(vol)
-        await ctx.send(f"Volume set to {vol} :loud_sound:")
+        await ctx.respond(f"Volume set to {vol} :loud_sound:")
 
-    @commands.command(aliases=["disconnect", "dc"])
+    @slash_command(aliases=["disconnect", "dc"])
     @voice_channel_player()
     async def stop(self, ctx: commands.Context):
         """Stop the player"""
         player: DisPlayer = ctx.voice_client
 
         await player.destroy()
-        await ctx.send("Stopped the player :stop_button: ")
+        await ctx.respond("Stopped the player :stop_button: ")
         self.bot.dispatch("dismusic_player_stop", player)
 
-    @commands.command()
+    @slash_command()
     @voice_channel_player()
     async def pause(self, ctx: commands.Context):
         """Pause the player"""
@@ -168,9 +168,9 @@ class Music(commands.Cog):
             self.bot.dispatch("dismusic_player_pause", player)
             return await ctx.send("Paused :pause_button: ")
 
-        await ctx.send("Player is not playing anything.")
+        await ctx.respond("Player is not playing anything.")
 
-    @commands.command()
+    @slash_command()
     @voice_channel_player()
     async def resume(self, ctx: commands.Context):
         """Resume the player"""
@@ -184,9 +184,9 @@ class Music(commands.Cog):
             self.bot.dispatch("dismusic_player_resume", player)
             return await ctx.send("Resumed :musical_note: ")
 
-        await ctx.send("Player is not playing anything.")
+        await ctx.respond("Player is not playing anything.")
 
-    @commands.command()
+    @slash_command()
     @voice_channel_player()
     async def skip(self, ctx: commands.Context):
         """Skip to next song in the queue."""
@@ -198,9 +198,9 @@ class Music(commands.Cog):
         await player.stop()
 
         self.bot.dispatch("dismusic_track_skip", player)
-        await ctx.send("Skipped :track_next:")
+        await ctx.respond("Skipped :track_next:")
 
-    @commands.command()
+    @slash_command()
     @voice_channel_player()
     async def seek(self, ctx: commands.Context, seconds: int):
         """Seek the player backward or forward"""
@@ -219,18 +219,18 @@ class Music(commands.Cog):
             self.bot.dispatch("dismusic_player_seek", player, old_position, position)
             return await ctx.send(f"Seeked {seconds} seconds :fast_forward: ")
 
-        await ctx.send("Player is not playing anything.")
+        await ctx.respond("Player is not playing anything.")
 
-    @commands.command()
+    @slash_command()
     @voice_channel_player()
     async def loop(self, ctx: commands.Context, loop_type: str = None):
         """Set loop to `NONE`, `CURRENT` or `PLAYLIST`"""
         player: DisPlayer = ctx.voice_client
 
         result = await player.set_loop(loop_type)
-        await ctx.send(f"Loop has been set to {result} :repeat: ")
+        await ctx.respond(f"Loop has been set to {result} :repeat: ")
 
-    @commands.command(aliases=["q"])
+    @slash_command(aliases=["q"])
     @voice_channel_player()
     async def queue(self, ctx: commands.Context):
         """Player queue"""
@@ -271,9 +271,9 @@ class Music(commands.Cog):
 
         embed.set_footer(text=length)
 
-        await ctx.send(embed=embed)
+        await ctx.respond(embed=embed)
 
-    @commands.command(aliases=["np"])
+    @slash_command(aliases=["np"])
     @voice_channel_player()
     async def nowplaying(self, ctx: commands.Context):
         """Currently playing song information"""
