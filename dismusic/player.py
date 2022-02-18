@@ -75,7 +75,7 @@ class DisPlayer(Player):
         if not track:
             raise NothingIsPlaying("Player is not playing anything.")
 
-        embed = discord.Embed(title=track.title, url=track.uri, color=discord.Color(0x2F3136))
+        embed = discord.Embed(title=track.title, url=track.uri, color=discord.Color.blurple()))
         embed.set_author(name=track.author, url=track.uri, icon_url=self.client.user.display_avatar.url)
         try:
             embed.set_thumbnail(url=track.thumb)
