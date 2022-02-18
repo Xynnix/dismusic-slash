@@ -1,4 +1,6 @@
-# dismusic
+# cord-music
+
+Dismusic for pycord with slash commands! 
 
 Music cog for discord bots. Supports YouTube, YoutubeMusic, SoundCloud and Spotify.
 
