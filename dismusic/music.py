@@ -106,25 +106,25 @@ class Music(commands.Cog):
         await ctx.invoke(self.connect)
         await self.play_track(ctx, query)
 
-    @play.slash_command(aliases=["yt"])
+    @play.command(aliases=["yt"])
     async def youtube(self, ctx: commands.Context, *, query: str):
         """Play a YouTube track"""
         await ctx.invoke(self.connect)
         await self.play_track(ctx, query, "yt")
 
-    @play.slash_command(aliases=["ytmusic"])
+    @play.command(aliases=["ytmusic"])
     async def youtubemusic(self, ctx: commands.Context, *, query: str):
         """Play a YouTubeMusic track"""
         await ctx.invoke(self.connect)
         await self.play_track(ctx, query, "ytmusic")
 
-    @play.slash_command(aliases=["sc"])
+    @play.command(aliases=["sc"])
     async def soundcloud(self, ctx: commands.Context, *, query: str):
         """Play a SoundCloud track"""
         await ctx.invoke(self.connect)
         await self.play_track(ctx, query, "soundcloud")
 
-    @play.slash_command(aliases=["sp"])
+    @play.command(aliases=["sp"])
     async def spotify(self, ctx: commands.Context, *, query: str):
         """play a spotify track"""
         await ctx.invoke(self.connect)
