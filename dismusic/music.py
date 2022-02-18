@@ -26,7 +26,7 @@ class Music(commands.Cog):
         player: DisPlayer = ctx.voice_client
 
         if ctx.author.voice.channel.id != player.channel.id:
-            raise MustBeSameChannel("You must be in the same voice channel as the player.")
+            raise MustBeSameChannel("**You must be in the same voice channel as the player.**")
 
         track_provider = {
             "yt": YouTubeTrack,
@@ -35,7 +35,7 @@ class Music(commands.Cog):
             "spotify": SpotifyTrack,
         }
 
-        msg = await ctx.send(f"Searching for `{query}` :mag_right:")
+        msg = await ctx.respond(f"**Searching for** `{query}` :mag_right:")
 
         provider: Provider = (
             track_provider.get(provider) if provider else track_provider.get(player.track_provider)
@@ -55,11 +55,11 @@ class Music(commands.Cog):
                 continue
 
         if not tracks:
-            return await msg.edit("No song/track found with given query.")
+            return await msg.edit("**No song/track found with given query.**")
 
         track = tracks[0]
 
-        await msg.edit(content=f"Added `{track.title}` to queue. ")
+        await msg.edit(content=f"**Added** `{track.title}` **to queue.** ")
         await player.queue.put(track)
 
         if not player.is_playing():
@@ -85,7 +85,7 @@ class Music(commands.Cog):
         if ctx.voice_client:
             return
 
-        msg = await ctx.send(f"Connecting to **`{ctx.author.voice.channel}`**")
+        msg = await ctx.respond(f"**Connecting to **`{ctx.author.voice.channel}`**")
 
         try:
             player: DisPlayer = await ctx.author.voice.channel.connect(cls=DisPlayer)
@@ -98,7 +98,7 @@ class Music(commands.Cog):
 
         await msg.edit(content=f"Connected to **`{player.channel.name}`**")
 
-    @commands.group(aliases=["p"], invoke_without_command=True)
+    @slash_command(aliases=["p"], invoke_without_command=True)
     @voice_connected()
     async def play(self, ctx: commands.Context, *, query: str):
         """Play or add song to queue (Defaults to YouTube)"""
