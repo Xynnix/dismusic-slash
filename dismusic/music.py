@@ -4,9 +4,7 @@ import wavelink
 import discord
 from discord import ClientException, Color, Embed
 from discord.commands import (
-    Option,
-    SlashCommand,
-    SlashCommandGroup
+    slash_command,
 )
 from discord.ext import commands
 from wavelink import (LavalinkException, LoadTrackError, SoundCloudTrack,
