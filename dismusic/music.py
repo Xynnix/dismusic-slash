@@ -3,7 +3,11 @@ import async_timeout
 import wavelink
 import discord
 from discord import ClientException, Color, Embed
-from discord.commands import slash_command
+from discord.commands import (
+    Option,
+    slash_command,
+    SlashCommandGroup
+)
 from discord.ext import commands
 from wavelink import (LavalinkException, LoadTrackError, SoundCloudTrack,
                       YouTubeMusicTrack, YouTubeTrack)
