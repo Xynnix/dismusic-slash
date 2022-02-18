@@ -1,23 +1,17 @@
 import asyncio
-
 import async_timeout
 import wavelink
-import discord
 from discord import ClientException, Color, Embed
 from discord.ext import commands
 from wavelink import (LavalinkException, LoadTrackError, SoundCloudTrack,
                       YouTubeMusicTrack, YouTubeTrack)
 from wavelink.ext import spotify
 from wavelink.ext.spotify import SpotifyTrack
-
 from .checks import voice_channel_player, voice_connected
 from .errors import MustBeSameChannel
 from .player import DisPlayer
 from ._classes import Provider
-from discord.commands import (
-    slash_command,
-)
-
+from discord.commands import slash_command
 
 class Music(commands.Cog):
     """Music commands"""
@@ -166,7 +160,7 @@ class Music(commands.Cog):
 
         if player.is_playing():
             if player.is_paused():
-                return await ctx.send("Player is already paused.")
+                return await ctx.respond("**Player is already paused**.")
 
             await player.set_pause(pause=True)
             self.bot.dispatch("dismusic_player_pause", player)
@@ -214,14 +208,14 @@ class Music(commands.Cog):
             old_position = player.position
             position = old_position + seconds
             if position > player.source.length:
-                return await ctx.send("**Can't seek past the end of the track.**")
+                return await ctx.respond("**Can't seek past the end of the track.**")
 
             if position < 0:
                 position = 0
 
             await player.seek(position * 1000)
             self.bot.dispatch("dismusic_player_seek", player, old_position, position)
-            return await ctx.send(f"Seeked {seconds} seconds :fast_forward: ")
+            return await ctx.respond(f"**Seeked {seconds} seconds** :fast_forward: ")
 
         await ctx.respond("**Player is not playing anything.**")
 
@@ -241,7 +235,7 @@ class Music(commands.Cog):
         player: DisPlayer = ctx.voice_client
 
         if len(player.queue._queue) < 1:
-            return await ctx.send("Nothing is in the queue.")
+            return await ctx.respond("**Nothing is in the queue.**")
 
         embed = Embed(color=Color(0x2F3136))
         embed.set_author(
