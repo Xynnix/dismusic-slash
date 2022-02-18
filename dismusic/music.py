@@ -2,6 +2,7 @@ import asyncio
 
 import async_timeout
 import wavelink
+import discord
 from discord import ClientException, Color, Embed
 from discord.ext import commands
 from wavelink import (LavalinkException, LoadTrackError, SoundCloudTrack,
@@ -13,6 +14,9 @@ from .checks import voice_channel_player, voice_connected
 from .errors import MustBeSameChannel
 from .player import DisPlayer
 from ._classes import Provider
+from discord.commands import (
+    slash_command,
+)
 
 
 class Music(commands.Cog):
