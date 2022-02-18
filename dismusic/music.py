@@ -109,25 +109,25 @@ class Music(commands.Cog):
         await ctx.invoke(self.connect)
         await self.play_track(ctx, query)
 
-    @play.command(aliases=["yt"])
+    @play.slash_command(aliases=["yt"])
     async def youtube(self, ctx: commands.Context, *, query: str):
         """Play a YouTube track"""
         await ctx.invoke(self.connect)
         await self.play_track(ctx, query, "yt")
 
-    @play.command(aliases=["ytmusic"])
+    @play.slash_command(aliases=["ytmusic"])
     async def youtubemusic(self, ctx: commands.Context, *, query: str):
         """Play a YouTubeMusic track"""
         await ctx.invoke(self.connect)
         await self.play_track(ctx, query, "ytmusic")
 
-    @play.command(aliases=["sc"])
+    @play.slash_command(aliases=["sc"])
     async def soundcloud(self, ctx: commands.Context, *, query: str):
         """Play a SoundCloud track"""
         await ctx.invoke(self.connect)
         await self.play_track(ctx, query, "soundcloud")
 
-    @play.command(aliases=["sp"])
+    @play.slash_command(aliases=["sp"])
     async def spotify(self, ctx: commands.Context, *, query: str):
         """play a spotify track"""
         await ctx.invoke(self.connect)
@@ -140,13 +140,13 @@ class Music(commands.Cog):
         player: DisPlayer = ctx.voice_client
 
         if vol < 0:
-            return await ctx.send("Volume can't be less than 0")
+            return await ctx.respond("**Volume can't be less than 0**")
 
         if vol > 100 and not forced:
-            return await ctx.send("Volume can't greater than 100")
+            return await ctx.respond("**Volume can't greater than 100**")
 
         await player.set_volume(vol)
-        await ctx.respond(f"Volume set to {vol} :loud_sound:")
+        await ctx.respond(f"**Volume set to** {vol} :loud_sound:")
 
     @slash_command(aliases=["disconnect", "dc"])
     @voice_channel_player()
@@ -155,7 +155,7 @@ class Music(commands.Cog):
         player: DisPlayer = ctx.voice_client
 
         await player.destroy()
-        await ctx.respond("Stopped the player :stop_button: ")
+        await ctx.respond("**Stopped the player** :stop_button: ")
         self.bot.dispatch("dismusic_player_stop", player)
 
     @slash_command()
@@ -170,9 +170,9 @@ class Music(commands.Cog):
 
             await player.set_pause(pause=True)
             self.bot.dispatch("dismusic_player_pause", player)
-            return await ctx.send("Paused :pause_button: ")
+            return await ctx.respond("Paused :pause_button: ")
 
-        await ctx.respond("Player is not playing anything.")
+        await ctx.respond("**Player is not playing anything.**")
 
     @slash_command()
     @voice_channel_player()
@@ -182,13 +182,13 @@ class Music(commands.Cog):
 
         if player.is_playing():
             if not player.is_paused():
-                return await ctx.send("Player is already playing.")
+                return await ctx.respond("**Player is already playing.**")
 
             await player.set_pause(pause=False)
             self.bot.dispatch("dismusic_player_resume", player)
-            return await ctx.send("Resumed :musical_note: ")
+            return await ctx.respond("**Resumed** :musical_note: ")
 
-        await ctx.respond("Player is not playing anything.")
+        await ctx.respond("**Player is not playing anything.**")
 
     @slash_command()
     @voice_channel_player()
@@ -202,7 +202,7 @@ class Music(commands.Cog):
         await player.stop()
 
         self.bot.dispatch("dismusic_track_skip", player)
-        await ctx.respond("Skipped :track_next:")
+        await ctx.respond("**Skipped** :track_next:")
 
     @slash_command()
     @voice_channel_player()
@@ -214,7 +214,7 @@ class Music(commands.Cog):
             old_position = player.position
             position = old_position + seconds
             if position > player.source.length:
-                return await ctx.send("Can't seek past the end of the track.")
+                return await ctx.send("**Can't seek past the end of the track.**")
 
             if position < 0:
                 position = 0
@@ -223,7 +223,7 @@ class Music(commands.Cog):
             self.bot.dispatch("dismusic_player_seek", player, old_position, position)
             return await ctx.send(f"Seeked {seconds} seconds :fast_forward: ")
 
-        await ctx.respond("Player is not playing anything.")
+        await ctx.respond("**Player is not playing anything.**")
 
     @slash_command()
     @voice_channel_player()
