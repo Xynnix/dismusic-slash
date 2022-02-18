@@ -9,7 +9,7 @@ Music cog for discord bots. Supports YouTube, YoutubeMusic, SoundCloud and Spoti
 or from Github (Might be unstable)
 
 ```sh
-python3 -m pip install git+https://github.com/NixonXC/dismusic.git
+python3 -m pip install git+https://github.com/NixonXC/cord-musicc.git
 ```
 
 # Usage
