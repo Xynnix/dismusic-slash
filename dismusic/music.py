@@ -99,13 +99,6 @@ class Music(commands.Cog):
 
         await ctx.send(f"**Connected to **`{player.channel.name}`")
 
-    @slash_command(aliases=["p"], invoke_without_command=True)
-    @voice_connected()
-    async def play(self, ctx: commands.Context, *, query: str):
-        """Play or add song to queue (Defaults to YouTube)"""
-        await ctx.invoke(self.connect)
-        await self.play_track(ctx, query)
-
     @slash_command(aliases=["vol"])
     @voice_channel_player()
     async def volume(self, ctx: commands.Context, vol: int, forced=False):
@@ -120,6 +113,13 @@ class Music(commands.Cog):
 
         await player.set_volume(vol)
         await ctx.respond(f"**Volume set to** {vol} :loud_sound:")
+        
+    @slash_command(aliases=["p"], invoke_without_command=True)
+    @voice_connected()
+    async def play(self, ctx: commands.Context, *, query: str):
+        """Play or add song to queue (Defaults to YouTube)"""
+        await ctx.invoke(self.connect)
+        await self.play_track(ctx, query)
 
     @slash_command(aliases=["disconnect", "dc"])
     @voice_channel_player()
