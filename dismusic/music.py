@@ -86,8 +86,7 @@ class Music(commands.Cog):
         if ctx.voice_client:
             return
 
-        msg = await ctx.respond(f"**Connecting to ** `{ctx.author.voice.channel}`")
-        await msg.message.edit(content=f"**Connected to **`{player.channel.name}`")
+        msg = await ctx.respond(f"**Connected to **`{player.channel.name}`")
 
         try:
             player: DisPlayer = await ctx.author.voice.channel.connect(cls=DisPlayer)
