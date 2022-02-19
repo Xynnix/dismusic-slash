@@ -60,7 +60,7 @@ class Music(commands.Cog):
 
         track = tracks[0]
 
-        await msg.edit(content=f"**Added** `{track.title}` **to queue.** ")
+        await msg.message.edit(content=f"**Added** `{track.title}` **to queue.** ")
         await player.queue.put(track)
 
         if not player.is_playing():
@@ -143,7 +143,7 @@ class Music(commands.Cog):
 
             await player.set_pause(pause=True)
             self.bot.dispatch("dismusic_player_pause", player)
-            return await ctx.respond("Paused :pause_button: ")
+            return await ctx.respond("**Paused** :pause_button: ")
 
         await ctx.respond("**Player is not playing anything.**")
 
