@@ -6,6 +6,11 @@ Music cog for discord bots. Supports YouTube, YoutubeMusic, SoundCloud and Spoti
 
 # Installation
 
+Pypi
+```
+pip install cord-music
+```
+
 or from Github (Might be unstable)
 
 ```sh
