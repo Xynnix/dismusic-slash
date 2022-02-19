@@ -103,7 +103,6 @@ class Music(commands.Cog):
     @voice_connected()
     async def play(self, ctx: commands.Context, *, query: str):
         """Play or add song to queue (Defaults to YouTube)"""
-        await ctx.invoke(self.connect)
         await self.play_track(ctx, query)
 
     @slash_command(aliases=["vol"])
