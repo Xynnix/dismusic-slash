@@ -34,9 +34,9 @@ setup(
     description="Music cog for discord bots. Supports YouTube, YoutubeMusic, SoundCloud and Spotify.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/NixonXC/dismusic/",
-    author="Md Shahriyar Alam and pycord support by NixonXC",
-    author_email="contact@shahriyar.dev",
+    url="https://github.com/NixonXC/cord-music/",
+    author="NixonXC",
+    author_email="pixiej@welcbot.ml",
     license="MIT",
     classifiers=classifiers,
     keywords="discord discord-music music-bot discord-music-bot lavalink wavelink",
@@ -44,7 +44,7 @@ setup(
     python_requires=">=3.7, <4",
     install_requires=requirements,
     project_urls={
-        "Bug Reports": "https://github.com/NixonXC/dismusic/issues",
-        "Source": "https://github.com/NixonXC/dismusic/",
+        "Bug Reports": "https://github.com/NixonXC/cord-music/issues",
+        "Source": "https://github.com/NixonXC/cord-music/",
     },
 )
