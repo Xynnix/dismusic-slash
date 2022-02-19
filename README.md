@@ -1,6 +1,8 @@
-# cord-music
+# Music Cord
 
 Dismusic for pycord with slash commands! 
+
+[Original Package](https://pypi.org/project/dismusic/) By shahriyardx
 
 Music cog for discord bots. Supports YouTube, YoutubeMusic, SoundCloud and Spotify.
 
@@ -8,7 +10,7 @@ Music cog for discord bots. Supports YouTube, YoutubeMusic, SoundCloud and Spoti
 
 Pypi
 ```
-pip install cord-music
+pip install music-cord
 ```
 
 or from Github (Might be unstable)
