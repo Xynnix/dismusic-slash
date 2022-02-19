@@ -56,7 +56,7 @@ class Music(commands.Cog):
                 continue
 
         if not tracks:
-            return await msg.edit("**No song/track found with given query.**")
+            return await ctx.send("**No song/track found with given query.**")
 
         track = tracks[0]
 
