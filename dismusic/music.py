@@ -97,7 +97,7 @@ class Music(commands.Cog):
         player.bound_channel = ctx.channel
         player.bot = self.bot
 
-        await await.ctx.send(f"**Connected to **`{player.channel.name}`")
+        await ctx.send(f"**Connected to **`{player.channel.name}`")
 
     @slash_command(aliases=["p"], invoke_without_command=True)
     @voice_connected()
