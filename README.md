@@ -105,4 +105,4 @@ on_dismusic_player_seek(player, previous_position, current_position):
 {"host": "lavalink.cobaltonline.net", "port": 443, "password":"cobaltlavanode23@", "https": True},
 ```
 
-[Join Discord](https://discord.gg/7SaE8v2) For any kind of help
+[Email](pixiej@welcbot.ml) for support 
