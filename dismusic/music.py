@@ -86,13 +86,13 @@ class Music(commands.Cog):
         if ctx.voice_client:
             return
 
-        msg = await ctx.respond(f"**Connecting to **`{ctx.author.voice.channel}'")
+        msg = await ctx.respond(f"**Connecting to ** `{ctx.author.voice.channel}`")
 
         try:
             player: DisPlayer = await ctx.author.voice.channel.connect(cls=DisPlayer)
             self.bot.dispatch("dismusic_player_connect", player)
         except (asyncio.TimeoutError, ClientException):
-            return await msg.edit(content="Failed to connect to voice channel.")
+            return await ctx.send(content="Failed to connect to voice channel.")
 
         player.bound_channel = ctx.channel
         player.bot = self.bot
@@ -103,7 +103,7 @@ class Music(commands.Cog):
     @voice_connected()
     async def play(self, ctx: commands.Context, *, query: str):
         """Play or add song to queue (Defaults to YouTube)"""
-        await ctx.invoke(self.bot.connect)
+        await ctx.invoke(self.connect())
         await self.play_track(ctx, query)
 
     @slash_command(aliases=["vol"])
