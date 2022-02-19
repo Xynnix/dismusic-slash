@@ -60,7 +60,7 @@ class Music(commands.Cog):
 
         track = tracks[0]
 
-        await await ctx.send(content=f"**Added** `{track.title}` **to queue.** ")
+        await ctx.send(content=f"**Added** `{track.title}` **to queue.** ")
         await player.queue.put(track)
 
         if not player.is_playing():
