@@ -86,7 +86,7 @@ class Music(commands.Cog):
         if ctx.voice_client:
             return
 
-        msg = await ctx.respond(f"**Connecting to **`{ctx.author.voice.channel}`**")
+        msg = await ctx.respond(f"**Connecting to **`{ctx.author.voice.channel}'")
 
         try:
             player: DisPlayer = await ctx.author.voice.channel.connect(cls=DisPlayer)
@@ -97,13 +97,13 @@ class Music(commands.Cog):
         player.bound_channel = ctx.channel
         player.bot = self.bot
 
-        await msg.edit(content=f"Connected to **`{player.channel.name}`**")
+        await await.ctx.send(f"**Connected to **`{player.channel.name}`")
 
     @slash_command(aliases=["p"], invoke_without_command=True)
     @voice_connected()
     async def play(self, ctx: commands.Context, *, query: str):
         """Play or add song to queue (Defaults to YouTube)"""
-        await ctx.invoke(self.connect)
+        await ctx.invoke(self.ctx.connect)
         await self.play_track(ctx, query)
 
     @slash_command(aliases=["vol"])
