@@ -323,7 +323,7 @@ class Music(commands.Cog):
             self.bot.dispatch("dismusic_player_pause", player)
             return await ctx.respond("**Paused** :pause_button: ")
 
-        await ctx.await("**Player is not playing anything.**")
+        await ctx.send("**Player is not playing anything.**")
 
     @commands.command()
     @voice_channel_player()
