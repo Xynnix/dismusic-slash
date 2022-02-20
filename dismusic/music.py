@@ -92,12 +92,12 @@ class Music(commands.Cog):
             player: DisPlayer = await ctx.author.voice.channel.connect(cls=DisPlayer)
             self.bot.dispatch("dismusic_player_connect", player)
         except (asyncio.TimeoutError, ClientException):
-            await msg.response.edit_message(content="**Failed to connect to voice channel.**")
+            await ctx.send("**Failed to connect to voice channel.**")
 
         player.bound_channel = ctx.channel
         player.bot = self.bot
 
-        await msg.response.edit_message(content=f"**Connected to **`{player.channel.name}`")
+        await msg.message.edit_message(content=f"**Connected to **`{player.channel.name}`")
 
     @slash_command(aliases=["vol"])
     @voice_channel_player()
