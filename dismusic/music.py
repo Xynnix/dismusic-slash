@@ -290,7 +290,7 @@ class Music(commands.Cog):
             return await ctx.reply("**Volume can't greater than 100**")
 
         await player.set_volume(vol)
-        await ctx.send(f"**Volume set to** {vol} :loud_sound:")
+        await ctx.send(f"**Volume set to** `{vol}` :loud_sound:")
         
     @commands.command(aliases=["p"], invoke_without_command=True)
     @voice_connected()
@@ -383,7 +383,7 @@ class Music(commands.Cog):
         player: DisPlayer = ctx.voice_client
 
         result = await player.set_loop(loop_type)
-        await ctx.send(f"Loop has been set to {result} :repeat: ")
+        await ctx.send(f"Loop has been set to `{result}` :repeat: ")
 
     @commands.command(aliases=["q"])
     @voice_channel_player()
