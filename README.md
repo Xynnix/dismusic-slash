@@ -37,7 +37,7 @@ bot.spotify_credentials = {
     'client_secret': 'CLIENT_SECRET_HERE'
 }
 
-bot.load_extension('dismusic')
+bot.load_extension('cord-music')
 bot.run('TOKEN')
 ```
 
