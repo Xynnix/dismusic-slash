@@ -82,7 +82,7 @@ class Music(commands.Cog):
     @slash_command(aliases=["con"])
     @voice_connected()
     async def connect(self, ctx: commands.Context):
-        ctx.defer()
+        await ctx.defer()
         """Connect the player"""
         if ctx.voice_client:
             return
@@ -98,7 +98,7 @@ class Music(commands.Cog):
         player.bound_channel = ctx.channel
         player.bot = self.bot
 
-        await msg.message.edit_message(content=f"**Connected to **`{player.channel.name}`")
+        await ctx.send(content=f"**Connected to **`{player.channel.name}`")
 
     @slash_command(aliases=["vol"])
     @voice_channel_player()
