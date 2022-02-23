@@ -82,7 +82,6 @@ class Music(commands.Cog):
     @slash_command(aliases=["con"])
     @voice_connected()
     async def connect(self, ctx: commands.Context):
-        await ctx.defer()
         """Connect the player"""
         if ctx.voice_client:
             return
