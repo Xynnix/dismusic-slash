@@ -98,6 +98,12 @@ class Music(commands.Cog):
         player.bot = self.bot
 
         await msg.edit_original_message(content=f"**Connected to **`{player.channel.name}`")
+        
+    @slash_command(aliases=["music"])
+    async def music-help(ctx):
+        em = discord.Embed(title="Music Commands", description="`play` , `pause` , ` resume`, `skip` , `seek` , `connect` , `volume` , `loop` , `queue` , `nowplaying`", color=discord.Color.blurple())
+        em.set_footer(text="Music Cord")
+        await ctx.respond(embed = em)
 
     @slash_command(aliases=["vol"])
     @voice_channel_player()
