@@ -101,10 +101,10 @@ class Music(commands.Cog):
         
     @slash_command()
     async def music(self, ctx):
-        em = discord.Embed(title="Music Commands", description="`play` , `pause` , ` resume`, `skip` , `seek` , `connect` , `volume` , `loop` , `queue` , `nowplaying`", color=discord.Color.blurple())
+        em = discord.Embed(title="Music Commands", description="`play` , `pause` , `resume`, `skip` , `seek` , `connect` , `volume` , `loop` , `queue` , `nowplaying`", color=discord.Color.blurple())
         em.set_footer(text="Music Cord")
         await ctx.respond(embed = em)
-
+        
     @slash_command(aliases=["vol"])
     @voice_channel_player()
     async def volume(self, ctx: commands.Context, vol: int, forced=False):
@@ -126,6 +126,26 @@ class Music(commands.Cog):
         """Play or add song to queue (Defaults to YouTube)"""
         await ctx.invoke(self.connect, ctx)
         await self.play_track(ctx, query)
+        
+    @slash_command(aliases=["con"])
+    @voice_connected()
+    async def 24/7(self, ctx: commands.Context):
+        """Enable 24/7 to disable it just do /stop"""
+        if ctx.voice_client:
+            await ctx.respond("Already enabled to disable it do /stop")
+
+        alls = await ctx.respond(f"**Enabling 24/7 in **`{ctx.author.voice.channel}`!")
+
+        try:
+            player: DisPlayer = await ctx.author.voice.channel.connect(cls=DisPlayer)
+            self.bot.dispatch("dismusic_player_connect", player)
+        except (asyncio.TimeoutError, ClientException):
+            await ctx.respond("**Failed to enable!**")
+
+        player.bound_channel = ctx.channel
+        player.bot = self.bot
+
+        await alls.edit_original_message(content=f"**Enabled 24/7 in **`{player.channel.name}`!")
 
     @slash_command(aliases=["disconnect", "dc"])
     @voice_channel_player()
