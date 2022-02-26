@@ -27,6 +27,8 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix='..')
 
+TOKEN = "your token here"
+
 bot.lavalink_nodes = [
     {"host": "losingtime.dpaste.org", "port": 2124, "password": "SleepingOnTrains"},
     # Can have multiple nodes here
@@ -39,7 +41,7 @@ bot.spotify_credentials = {
 }
 
 bot.load_extension('cord-music')
-bot.run('TOKEN')
+bot.run(TOKEN)
 ```
 
 # Commands
