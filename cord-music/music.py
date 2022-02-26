@@ -129,7 +129,7 @@ class Music(commands.Cog):
         
     @slash_command(aliases=["con"])
     @voice_connected()
-    async def 24(self, ctx: commands.Context):
+    async def alwaysjoined(self, ctx: commands.Context):
         """Enable 24/7 to disable it just do /stop"""
         if ctx.voice_client:
             await ctx.respond("Already enabled to disable it do /stop")
