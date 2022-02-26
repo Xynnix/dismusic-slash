@@ -1,6 +1,6 @@
 # Music Cord
 
-Dismusic for pycord with slash commands! 
+Dismusic for pycord with slash commands!
 
 [Original Package](https://pypi.org/project/dismusic/) By shahriyardx
 
@@ -9,6 +9,7 @@ Music cog for discord bots. Supports YouTube, YoutubeMusic, SoundCloud and Spoti
 # Installation
 
 Pypi
+
 ```
 pip install music-cord
 ```
@@ -112,4 +113,4 @@ on_dismusic_player_seek(player, previous_position, current_position):
 {"host": "lavalink.cobaltonline.net", "port": 443, "password":"cobaltlavanode23@", "https": True},
 ```
 
-[Email](pixiej@welcbot.ml) for support 
+[Email](mailto:pixiej@welcbot.ml) for support
