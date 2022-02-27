@@ -75,9 +75,9 @@ class Music(commands.Cog):
                 node: wavelink.Node = await wavelink.NodePool.create_node(
                     bot=self.bot, **config, spotify_client=spotify.SpotifyClient(**spotify_credential)
                 )
-                print(f"[dismusic] INFO - Created node: {node.identifier}")
+                print(f"[music-cord] INFO - Created node: {node.identifier}")
             except Exception:
-                print(f"[dismusic] ERROR - Failed to create node {config['host']}:{config['port']}")
+                print(f"[music-cord] ERROR - Failed to create node {config['host']}:{config['port']}")
 
     @slash_command(aliases=["con"])
     @voice_connected()
