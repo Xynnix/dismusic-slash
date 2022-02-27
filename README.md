@@ -23,6 +23,7 @@ python3 -m pip install git+https://github.com/NixonXC/cord-music.git
 # Usage
 
 ```python
+import discord
 from discord.ext import commands
 
 intents = discord.Intents.all()
