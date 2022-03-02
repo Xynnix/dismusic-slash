@@ -5,9 +5,30 @@ import async_timeout
 import discord
 from discord.ext import commands
 from wavelink import Player
-
+from discord.ui import Button, View
 from .errors import InvalidLoopMode, NotEnoughSong, NothingIsPlaying
 
+class counter(discord.ui.View):
+    """Stop and skip buttons"""
+    @discord.ui.button(label="Stop", emoji="⏹")
+    async def stop(self, button: discord.ui.Button, interaction: discord.Interaction):
+        player: DisPlayer = ctx.voice_client
+
+        await player.destroy()
+        await interaction.response.send_message("**Stopped the player** :stop_button:", ephemeral=True)
+        self.bot.dispatch("dismusic_player_stop", player)
+        
+    @discord.ui.button(label="Skip", emoji="⏭")
+    async def skip(self, button: discord.ui.Button, interaction: discord.Interaction):
+        player: DisPlayer = ctx.voice_client
+
+        if player.loop == "CURRENT":
+            player.loop = "NONE"
+
+        await player.stop()
+
+        self.bot.dispatch("dismusic_track_skip", player)
+        await interaction.response.send_message("**Skipped** :track_next:", ephemeral=True)
 
 class DisPlayer(Player):
     def __init__(self, *args, **kwargs):
@@ -104,4 +125,4 @@ class DisPlayer(Player):
         if not ctx:
             return await self.bound_channel.send(embed=embed)
 
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed, view=counter())
