@@ -5,6 +5,7 @@ import async_timeout
 import discord
 from discord.ext import commands
 from wavelink import Player
+from discord.ui import Button, View
 from .errors import InvalidLoopMode, NotEnoughSong, NothingIsPlaying
 
 class DisPlayer(Player):
