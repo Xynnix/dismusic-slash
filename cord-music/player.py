@@ -91,21 +91,11 @@ class DisPlayer(Player):
         b4 = Button(label="Stop", emoji="⏹")
         b3 = Button(label="Skip", emoji="⏭")
         async def b3_callback(interaction):
-            ctx: commands.Context
-            player: DisPlayer = ctx.voice_client
-
-            if player.loop == "CURRENT":
-                player.loop = "NONE"
-
             await player.stop()
-
             self.bot.dispatch("dismusic_track_skip", player)
             await interaction.response.send_message("**Skipped** :track_next:", ephemeral=True)
         b3.callback = b3_callback
         async def b4_callback(interaction):
-            ctx: commands.Context
-            player: DisPlayer = ctx.voice_client
-
             await player.destroy()
             await interaction.response.send_message("**Stopped the player** :stop_button:", ephemeral=True)
             self.bot.dispatch("dismusic_player_stop", player)
