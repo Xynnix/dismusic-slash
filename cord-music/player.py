@@ -8,28 +8,6 @@ from wavelink import Player
 from discord.ui import Button, View
 from .errors import InvalidLoopMode, NotEnoughSong, NothingIsPlaying
 
-class counter(discord.ui.View):
-    """Stop and skip buttons"""
-    @discord.ui.button(label="Stop", emoji="⏹")
-    async def stop(self, button: discord.ui.Button, interaction: discord.Interaction):
-        player: DisPlayer = ctx.voice_client
-
-        await player.destroy()
-        await interaction.response.send_message("**Stopped the player** :stop_button:", ephemeral=True)
-        self.bot.dispatch("dismusic_player_stop", player)
-        
-    @discord.ui.button(label="Skip", emoji="⏭")
-    async def skip(self, button: discord.ui.Button, interaction: discord.Interaction):
-        player: DisPlayer = ctx.voice_client
-
-        if player.loop == "CURRENT":
-            player.loop = "NONE"
-
-        await player.stop()
-
-        self.bot.dispatch("dismusic_track_skip", player)
-        await interaction.response.send_message("**Skipped** :track_next:", ephemeral=True)
-
 class DisPlayer(Player):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -124,5 +102,27 @@ class DisPlayer(Player):
 
         if not ctx:
             return await self.bound_channel.send(embed=embed)
+        b4 = Button(label="Stop", emoji="⏹")
+        b3 = Button(label="Skip", emoji="⏭")
+        async def b3_callback(interaction):
+            player: DisPlayer = ctx.voice_client
 
-        await ctx.send(embed=embed, view=counter())
+            if player.loop == "CURRENT":
+                player.loop = "NONE"
+
+            await player.stop()
+
+            self.bot.dispatch("dismusic_track_skip", player)
+            await interaction.response.send_message("**Skipped** :track_next:", ephemeral=True)
+        b3.callback = b3_callback
+        async def b4_callback(interaction):
+            player: DisPlayer = ctx.voice_client
+
+            await player.destroy()
+            await interaction.response.send_message("**Stopped the player** :stop_button:", ephemeral=True)
+            self.bot.dispatch("dismusic_player_stop", player)
+        b4.callback = b4_callback
+        view = View()
+        view.add_item(b4)
+        view.add_item(b3)
+        await ctx.send(embed=embed, view=view)
