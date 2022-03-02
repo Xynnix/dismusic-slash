@@ -13,10 +13,9 @@ from wavelink.ext import spotify
 from wavelink.ext.spotify import SpotifyTrack
 from .checks import voice_channel_player, voice_connected
 from .errors import MustBeSameChannel
-from discord.ui import Button, View
 from .player import DisPlayer
 from ._classes import Provider
-        
+
 class Music(commands.Cog):
     """Music commands"""
 
@@ -79,7 +78,7 @@ class Music(commands.Cog):
                 print(f"[music-cord] INFO - Created node: {node.identifier}")
             except Exception:
                 print(f"[music-cord] ERROR - Failed to create node {config['host']}:{config['port']}")
-                
+
     @slash_command(aliases=["con"])
     @voice_connected()
     async def connect(self, ctx: commands.Context):
@@ -102,7 +101,7 @@ class Music(commands.Cog):
         
     @slash_command()
     async def music(self, ctx):
-        em = discord.Embed(title="Music Commands", description="`play` , `pause` , `resume`, `skip` , `seek` , `connect` , `volume` , `loop` , `queue` , `nowplaying` , `alwaysjoined` , `music`", color=discord.Color.blurple())
+        em = discord.Embed(title="Music Commands", description="`play` , `pause` , `resume`, `skip` , `seek` , `connect` , `volume` , `loop` , `queue` , `nowplaying` , alwaysjoined , `music`", color=discord.Color.blurple())
         em.set_footer(text="Music Cord")
         await ctx.respond(embed = em)
         
@@ -274,8 +273,9 @@ class Music(commands.Cog):
             length = f"{int(length)}s"
 
         embed.set_footer(text=length)
+
         await ctx.respond(embed=embed)
-        
+
     @slash_command(aliases=["np"])
     @voice_channel_player()
     async def nowplaying(self, ctx: commands.Context):

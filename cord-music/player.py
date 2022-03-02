@@ -5,7 +5,9 @@ import async_timeout
 import discord
 from discord.ext import commands
 from wavelink import Player
+
 from .errors import InvalidLoopMode, NotEnoughSong, NothingIsPlaying
+
 
 class DisPlayer(Player):
     def __init__(self, *args, **kwargs):
@@ -87,7 +89,7 @@ class DisPlayer(Player):
         )
         embed.add_field(name="Looping", value=self.loop)
         embed.add_field(name="Volume", value=self.volume)
-        
+
         next_song = ""
 
         if self.loop == "CURRENT":
@@ -100,5 +102,6 @@ class DisPlayer(Player):
             embed.add_field(name="Next Song", value=next_song, inline=False)
 
         if not ctx:
-            return await self.bound_channel.send(embed=embed, view=view)
-        await ctx.send(embed=embed, view=view)
+            return await self.bound_channel.send(embed=embed)
+
+        await ctx.send(embed=embed)
