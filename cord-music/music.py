@@ -80,28 +80,6 @@ class Music(commands.Cog):
             except Exception:
                 print(f"[music-cord] ERROR - Failed to create node {config['host']}:{config['port']}")
                 
-class counter(discord.ui.View):
-    """Stop and skip buttons"""
-    @discord.ui.button(label="Stop", emoji="⏹")
-    async def stop(self, button: discord.ui.Button, interaction: discord.Interaction):
-        player: DisPlayer = ctx.voice_client
-
-        await player.destroy()
-        await interaction.response.send_message("**Stopped the player** :stop_button:", ephemeral=True)
-        self.bot.dispatch("dismusic_player_stop", player)
-        
-    @discord.ui.button(label="Skip", emoji="⏭")
-    async def skip(self, button: discord.ui.Button, interaction: discord.Interaction):
-        player: DisPlayer = ctx.voice_client
-
-        if player.loop == "CURRENT":
-            player.loop = "NONE"
-
-        await player.stop()
-
-        self.bot.dispatch("dismusic_track_skip", player)
-        await interaction.response.send_message("**Skipped** :track_next:", ephemeral=True)
-                
     @slash_command(aliases=["con"])
     @voice_connected()
     async def connect(self, ctx: commands.Context):
@@ -296,8 +274,8 @@ class counter(discord.ui.View):
             length = f"{int(length)}s"
 
         embed.set_footer(text=length)
-        await ctx.respond(embed=embed, view=counter())
-
+        await ctx.respond(embed=embed)
+        
     @slash_command(aliases=["np"])
     @voice_channel_player()
     async def nowplaying(self, ctx: commands.Context):
