@@ -5,7 +5,6 @@ import async_timeout
 import discord
 from discord.ext import commands
 from wavelink import Player
-from discord.ui import Button, View
 from .errors import InvalidLoopMode, NotEnoughSong, NothingIsPlaying
 
 class DisPlayer(Player):
@@ -88,22 +87,7 @@ class DisPlayer(Player):
         )
         embed.add_field(name="Looping", value=self.loop)
         embed.add_field(name="Volume", value=self.volume)
-        b4 = Button(label="Stop", emoji="⏹")
-        b3 = Button(label="Skip", emoji="⏭")
-        async def b4_callback(self, interaction):
-            await self.stop()
-            await interaction.response.send_message("**Stopped the player** :stop_button:", ephemeral=True)
-            self.bot.dispatch("dismusic_player_stop", player)
-        b4.callback = b4_callback
-        async def b3_callback(self, interaction):
-            await self.destroy()
-            await interaction.response.send_message("**Skipped** :track_next:", ephemeral=True)
-            self.bot.dispatch("dismusic_track_skip", player)
-        b3.callback = b3_callback
-        view = View()
-        view.add_item(b4)
-        view.add_item(b3)
-
+        
         next_song = ""
 
         if self.loop == "CURRENT":
