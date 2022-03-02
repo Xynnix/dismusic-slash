@@ -90,16 +90,16 @@ class DisPlayer(Player):
         embed.add_field(name="Volume", value=self.volume)
         b4 = Button(label="Stop", emoji="⏹")
         b3 = Button(label="Skip", emoji="⏭")
-        async def b3_callback(interaction):
-            await player.stop()
-            self.bot.dispatch("dismusic_track_skip", player)
-            await interaction.response.send_message("**Skipped** :track_next:", ephemeral=True)
-        b3.callback = b3_callback
-        async def b4_callback(interaction):
-            await player.destroy()
+        async def b4_callback(self, interaction):
+            await self.stop()
             await interaction.response.send_message("**Stopped the player** :stop_button:", ephemeral=True)
             self.bot.dispatch("dismusic_player_stop", player)
         b4.callback = b4_callback
+        async def b3_callback(self, interaction):
+            await self.destroy()
+            await interaction.response.send_message("**Skipped** :track_next:", ephemeral=True)
+            self.bot.dispatch("dismusic_track_skip", player)
+        b3.callback = b3_callback
         view = View()
         view.add_item(b4)
         view.add_item(b3)
