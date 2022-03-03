@@ -112,9 +112,9 @@ class DisPlayer(Player):
             await interaction.response.send_message("**Skipped** :track_next:", ephemeral=True)
         b3.callback = b3_callback
         view = View()
+        view.add_item(b5)
         view.add_item(b4)
         view.add_item(b3)
-        view.add_item(b5)
         next_song = ""
 
         if self.loop == "CURRENT":
