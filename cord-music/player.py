@@ -92,6 +92,7 @@ class DisPlayer(Player):
         embed.add_field(name="Volume", value=self.volume)
         b4 = Button(label="Stop", emoji="⏹")
         b3 = Button(label="Skip", emoji="⏭")
+        b5 = Button(label="Loop", emoji="🔂")
         async def b4_callback(interaction):
             player: DisPlayer = ctx.voice_client
 
@@ -113,6 +114,7 @@ class DisPlayer(Player):
         view = View()
         view.add_item(b4)
         view.add_item(b3)
+        view.add_item(b5)
         next_song = ""
 
         if self.loop == "CURRENT":
