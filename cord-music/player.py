@@ -92,14 +92,14 @@ class DisPlayer(Player):
         embed.add_field(name="Volume", value=self.volume)
         b4 = Button(label="Stop", emoji="⏹")
         b3 = Button(label="Skip", emoji="⏭")
-        async def b4_callback(self, interaction):
+        async def b4_callback(interaction):
             player: DisPlayer = ctx.voice_client
 
             await player.destroy()
             await interaction.response.send_message("**Stopped the player** :stop_button:", ephemeral=True)
             self.bot.dispatch("dismusic_player_stop", player)
         b4.callback = b4_callback
-        async def b3_callback(self, interaction):
+        async def b3_callback(interaction):
             player: DisPlayer = ctx.voice_client
 
             if player.loop == "CURRENT":
