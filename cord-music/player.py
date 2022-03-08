@@ -96,6 +96,12 @@ class DisPlayer(Player):
         view = View()
         view.add_item(b5)
         view.add_item(b4)
+        async def b4_callback(interaction):
+            player: DisPlayer = ctx.voice_client
+            await player.destroy()
+            await interaction.response.send_message("**Stopped ⏹**", ephemeral=True)
+            self.bot.dispatch("dismusic_player_stop", player)
+        b4.callback = b4_callback
         view.add_item(b3)
         next_song = ""
 
