@@ -110,4 +110,4 @@ class DisPlayer(Player):
         if not ctx:
             return await self.bound_channel.send(embed=embed, view=view)
 
-        await ctx.send(embed=embed, view=view)
+        await ctx.respond(embed=embed, view=view)
