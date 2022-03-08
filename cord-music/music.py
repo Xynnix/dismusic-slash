@@ -7,14 +7,14 @@ from discord.commands import (
     slash_command,
 )
 from discord.ext import commands
-from wavelink import (LavalinkException, LoadTrackError, SoundCloudTrack,
-                      YouTubeMusicTrack, YouTubeTrack)
+from wavelink import LavalinkException, LoadTrackError, SoundCloudTrack, YouTubeMusicTrack, YouTubeTrack
 from wavelink.ext import spotify
 from wavelink.ext.spotify import SpotifyTrack
+
+from ._classes import Provider
 from .checks import voice_channel_player, voice_connected
 from .errors import MustBeSameChannel
 from .player import DisPlayer
-from ._classes import Provider
 
 class Music(commands.Cog):
     """Music commands"""
