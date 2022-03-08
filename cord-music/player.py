@@ -8,8 +8,7 @@ from wavelink import Player
 from discord.ui import Button, View
 
 from .errors import InvalidLoopMode, NotEnoughSong, NothingIsPlaying
-
-
+        
 class DisPlayer(Player):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -111,4 +110,4 @@ class DisPlayer(Player):
         if not ctx:
             return await self.bound_channel.send(embed=embed, view=view)
 
-        await ctx.respond(embed=embed, view=view)
+        await ctx.send(embed=embed, view=view)
