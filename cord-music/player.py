@@ -92,7 +92,7 @@ class DisPlayer(Player):
         b5 = Button(label="Loop", emoji="🔂")
         b4 = Button(label="Stop", emoji="⏹")
         b3 = Button(label="Skip", emoji="⏭")
-        async def b3_callback(interaction, ctx):
+        async def b3_callback(ctx, interaction):
                 player: DisPlayer = ctx.voice_client
 
                 if player.loop == "CURRENT":
