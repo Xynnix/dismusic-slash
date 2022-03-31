@@ -92,6 +92,17 @@ class DisPlayer(Player):
         b5 = Button(label="Loop", emoji="🔂")
         b4 = Button(label="Stop", emoji="⏹")
         b3 = Button(label="Skip", emoji="⏭")
+        async def b3_callback(interaction):
+                player: DisPlayer = ctx.voice_client
+
+                if player.loop == "CURRENT":
+                        player.loop = "NONE"
+
+                await player.stop()
+
+                self.bot.dispatch("dismusic_track_skip", player)
+                await ctx.respond("**Skipped** :track_next:")
+        b3.callback = b3_callback
         view = View()
         view.add_item(b5)
         view.add_item(b4)
