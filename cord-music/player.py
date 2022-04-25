@@ -90,18 +90,18 @@ class DisPlayer(Player):
         embed.add_field(name="Looping", value=self.loop)
         embed.add_field(name="Volume", value=self.volume)
         b5 = Button(label="Loop", emoji="🔂")
+        b3 = Button(label="Skip", emoji="⏭")
+        async def b5_callback(interaction):
+                await interaction.response.send_message("**Skipped** ⏭")
+        b5.callback = b5_callback
         b4 = Button(label="Stop", emoji="⏹")
+        async def b4_callback(interaction):
+                await destroy()
+                await interaction.response.send_message("**Stopped** ⏹")
+        b4.callback = b4_callback
         b3 = Button(label="Skip", emoji="⏭")
         async def b3_callback(interaction):
-                player: DisPlayer = ctx.voice_client
-
-                if player.loop == "CURRENT":
-                        player.loop = "NONE"
-
-                await player.stop()
-
-                self.bot.dispatch("dismusic_track_skip", player)
-                await ctx.respond("**Skipped** :track_next:")
+                await interaction.response.send_message("**Skipped** ⏭")
         b3.callback = b3_callback
         view = View()
         view.add_item(b5)
