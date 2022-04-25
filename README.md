@@ -8,7 +8,7 @@ Music cog for discord bots. Supports YouTube, YoutubeMusic, SoundCloud and Spoti
 
 # Stats
 
-[![Downloads](https://static.pepy.tech/personalized-badge/music-cord?period=month&units=international_system&left_color=black&right_color=blue&left_text=Downloads)](https://pepy.tech/project/music-cord) In the Last 30 Days
+[![Downloads](https://pepy.tech/badge/music-cord/month)](https://pepy.tech/project/music-cord) In the Last 30 Days
 
 [![Downloads](https://pepy.tech/badge/music-cord)](https://pepy.tech/project/music-cord) All Time
 
