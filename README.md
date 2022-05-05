@@ -1,4 +1,4 @@
-# Music Cord
+# Music Cord (Not Updated Anymore)(Archived)
 
 Dismusic for pycord with slash commands!
 
