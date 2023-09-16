@@ -3,8 +3,8 @@ import async_timeout
 import wavelink
 import discord
 from discord import ClientException, Color, Embed
-from discord.commands import (
-    slash_command,
+from discord import (
+    app_commands,
 )
 from discord.ext import commands
 from wavelink import LavalinkException, LoadTrackError, SoundCloudTrack, YouTubeMusicTrack, YouTubeTrack
@@ -79,7 +79,7 @@ class Music(commands.Cog):
             except Exception:
                 print(f"[music-cord] ERROR - Failed to create node {config['host']}:{config['port']}")
 
-    @slash_command(aliases=["con"])
+    @app_commands.command(aliases=["con"])
     @voice_connected()
     async def connect(self, ctx: commands.Context):
         """Connect the player"""
@@ -99,13 +99,13 @@ class Music(commands.Cog):
 
         await msg.edit_original_message(content=f"**Connected to **`{player.channel.name}`")
         
-    @slash_command()
+    @app_commands.command()
     async def music(self, ctx):
         em = discord.Embed(title="Music Commands", description="`play` , `pause` , `resume`, `skip` , `seek` , `connect` , `volume` , `loop` , `queue` , `nowplaying` , alwaysjoined , `music`", color=discord.Color.blurple())
         em.set_footer(text="Music Cord")
         await ctx.respond(embed = em)
         
-    @slash_command(aliases=["vol"])
+    @app_commands.command(aliases=["vol"])
     @voice_channel_player()
     async def volume(self, ctx: commands.Context, vol: int, forced=False):
         """Set volume"""
@@ -120,14 +120,14 @@ class Music(commands.Cog):
         await player.set_volume(vol)
         await ctx.respond(f"**Volume set to** {vol} :loud_sound:")
         
-    @slash_command(aliases=["p"], invoke_without_command=True)
+    @app_commands.command(aliases=["p"], invoke_without_command=True)
     @voice_connected()
     async def play(self, ctx: commands.Context, *, query: str):
         """Play or add song to queue (Defaults to YouTube)"""
         await ctx.invoke(self.connect)
         await self.play_track(ctx, query)
         
-    @slash_command(aliases=["con"])
+    @app_commands.command(aliases=["con"])
     @voice_connected()
     async def alwaysjoined(self, ctx: commands.Context):
         """Enable 24/7 to disable it just do /stop"""
@@ -147,7 +147,7 @@ class Music(commands.Cog):
 
         await alls.edit_original_message(content=f"**Enabled 24/7 in **`{player.channel.name}`!")
 
-    @slash_command(aliases=["disconnect", "dc"])
+    @app_commands.command(aliases=["disconnect", "dc"])
     @voice_channel_player()
     async def stop(self, ctx: commands.Context):
         """Stop the player"""
@@ -157,7 +157,7 @@ class Music(commands.Cog):
         await ctx.respond("**Stopped the player** :stop_button: ")
         self.bot.dispatch("dismusic_player_stop", player)
 
-    @slash_command()
+    @app_commands.command()
     @voice_channel_player()
     async def pause(self, ctx: commands.Context):
         """Pause the player"""
@@ -173,7 +173,7 @@ class Music(commands.Cog):
 
         await ctx.respond("**Player is not playing anything.**")
 
-    @slash_command()
+    @app_commands.command()
     @voice_channel_player()
     async def resume(self, ctx: commands.Context):
         """Resume the player"""
@@ -189,7 +189,7 @@ class Music(commands.Cog):
 
         await ctx.respond("**Player is not playing anything.**")
 
-    @slash_command()
+    @app_commands.command()
     @voice_channel_player()
     async def skip(self, ctx: commands.Context):
         """Skip to next song in the queue."""
@@ -203,7 +203,7 @@ class Music(commands.Cog):
         self.bot.dispatch("dismusic_track_skip", player)
         await ctx.respond("**Skipped** :track_next:")
 
-    @slash_command()
+    @app_commands.command()
     @voice_channel_player()
     async def seek(self, ctx: commands.Context, seconds: int):
         """Seek the player backward or forward"""
@@ -224,7 +224,7 @@ class Music(commands.Cog):
 
         await ctx.respond("**Player is not playing anything.**")
 
-    @slash_command()
+    @app_commands.command()
     @voice_channel_player()
     async def loop(self, ctx: commands.Context, loop_type: str = None):
         """Set loop to `NONE`, `CURRENT` or `PLAYLIST`"""
@@ -233,7 +233,7 @@ class Music(commands.Cog):
         result = await player.set_loop(loop_type)
         await ctx.respond(f"Loop has been set to {result} :repeat: ")
 
-    @slash_command(aliases=["q"])
+    @app_commands.command(aliases=["q"])
     @voice_channel_player()
     async def queue(self, ctx: commands.Context):
         """Player queue"""
@@ -276,7 +276,7 @@ class Music(commands.Cog):
 
         await ctx.respond(embed=embed)
 
-    @slash_command(aliases=["np"])
+    @app_commands.command(aliases=["np"])
     @voice_channel_player()
     async def nowplaying(self, ctx: commands.Context):
         """Currently playing song information"""
