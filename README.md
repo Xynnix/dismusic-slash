@@ -1,26 +1,43 @@
-[![Downloads](https://static.pepy.tech/personalized-badge/dismusic?period=total&units=abbreviation&left_color=blue&right_color=brightgreen&left_text=Downloads)](https://pepy.tech/project/dismusic)
-# dismusic
+# Music Cord 
+
+Dismusic for pycord with slash commands!
+
+[Original Package](https://pypi.org/project/dismusic/) By shahriyardx
 
 Music cog for discord bots. Supports YouTube, YoutubeMusic, SoundCloud and Spotify.
 
+# Stats
+
+[![Downloads](https://pepy.tech/badge/music-cord/month)](https://pepy.tech/project/music-cord) In the Last 30 Days
+
+[![Downloads](https://pepy.tech/badge/music-cord)](https://pepy.tech/project/music-cord) All Time
+
+
 # Installation
 
-```sh
-python3 -m pip install dismusic
+Pypi
+
+```
+pip install music-cord
 ```
 
 or from Github (Might be unstable)
 
 ```sh
-python3 -m pip install git+https://github.com/shahriyardx/dismusic.git
+python3 -m pip install git+https://github.com/NixonXC/cord-music.git
 ```
 
 # Usage
 
 ```python
+import discord
 from discord.ext import commands
 
-bot = commands.Bot(command_prefix='..')
+intents = discord.Intents.all()
+
+bot = commands.Bot(command_prefix=">>", intents=intents)
+
+TOKEN = "your token here"
 
 bot.lavalink_nodes = [
     {"host": "losingtime.dpaste.org", "port": 2124, "password": "SleepingOnTrains"},
@@ -33,8 +50,8 @@ bot.spotify_credentials = {
     'client_secret': 'CLIENT_SECRET_HERE'
 }
 
-bot.load_extension('dismusic')
-bot.run('TOKEN')
+bot.load_extension('cord-music')
+bot.run(TOKEN)
 ```
 
 # Commands
@@ -51,8 +68,6 @@ bot.run('TOKEN')
 **queue** - `See queue` \
 **volume** - `Set volume` \
 **loop** - `Loop song/playlist`
-
-> Filter commands coming soon.
 
 # Events
 
@@ -88,6 +103,26 @@ on_dismusic_player_seek(player, previous_position, current_position):
 ```
 
 # Lavalink Configs
-Find configs here [https://lavalink.darrennathanael.com/](https://lavalink.darrennathanael.com/)
 
-[Join Discord](https://discord.gg/7SaE8v2) For any kind of help
+```py
+# No SSL/HTTPS
+{"host": "losingtime.dpaste.org", "port": 2124, "password": "SleepingOnTrains"}
+{"host": "lava.link", "port": 80, "password": "dismusic"}
+{"host": "lavalink.islantay.tk", "port": 8880, "password": "waifufufufu"}
+
+# SSL
+{"host": "lavalink.devz.cloud", "port": 443, "password": "mathiscool", "https": True},
+{"host": "lavalink2.devz.cloud", "port": 443, "password": "mathiscool", "https": True},
+{"host": "disbotlistlavalink.ml", "port": 443, "password": "LAVA", "https": True},
+{"host": "lavalink.scpcl.site", "port": 443, "password": "lvserver", "https": True},
+{"host": "lavalink.mariliun.ml", "port": 443, "password": "lavaliun", "https": True},
+{"host": "lavalinkinc.ml", "port": 443, "password": "incognito", "https": True},
+{"host": "node1.lavalink.trgop.gq", "port": 443, "password": "onionispro", "https": True},
+{"host": "node3.lavalink.trgop.gq", "port": 443, "password": "onionop", "https": True},
+{"host": "node5.lavalink.trgop.gq", "port": 443, "password": "htandsm", "https": True},
+{"host": "www.lavalinknodepublic.ml", "port": 443, "password": "mrextinctcodes", "https": True},
+{"host": "www.lavalinknodepublic2.ml", "port": 443, "password": "mrextinctcodes", "https": True},
+{"host": "lavalink.cobaltonline.net", "port": 443, "password":"cobaltlavanode23@", "https": True},
+```
+
+[Email](mailto:pixiej@welcbot.ml) for support
