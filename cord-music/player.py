@@ -16,7 +16,7 @@ class DisPlayer(Player):
         self.queue = asyncio.Queue()
         self.loop = "NONE"  # CURRENT, PLAYLIST
         self.bound_channel = None
-        self.track_provider = "yt"
+        self.track_provider = "spotify"
 
     async def destroy(self) -> None:
         self.queue = None
